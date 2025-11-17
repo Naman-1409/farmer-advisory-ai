@@ -11,6 +11,8 @@ from typing import Optional, Dict, Any, List
 from contextlib import asynccontextmanager
 import motor.motor_asyncio
 from datetime import datetime
+from pydantic import BaseModel, Field
+from typing import Any, Optional
 import uuid
 import logging
 from pathlib import Path
@@ -271,7 +273,7 @@ class PredictionResponse(BaseModel):
     prediction: Any
     confidence: Optional[float] = None
     model_used: str
-    timestamp: str
+    timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
 
 # ==================== MODEL LOADER ====================
 class ModelLoader:
