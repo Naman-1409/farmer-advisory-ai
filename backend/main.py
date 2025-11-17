@@ -273,7 +273,12 @@ class PredictionResponse(BaseModel):
     prediction: Any
     confidence: Optional[float] = None
     model_used: str
-    timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
+    timestamp: str
+
+    model_config = {
+        "protected_namespaces": ()
+    }
+
 
 # ==================== MODEL LOADER ====================
 class ModelLoader:
